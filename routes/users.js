@@ -29,7 +29,7 @@ router.post('/useradd',upload.single('photo'),function (req,res) {
   var user=new User();
   user.name=req.body.uname;
   user.email=req.body.email;
-  user.password=req.body.pwd;
+  user.password=req.body.password;
   if(req.file) user.imgUrl='/images/uploads/'+req.file.filename;
   user.save(function (err,rtn){
     if(err)throw err;
@@ -68,7 +68,7 @@ router.post('/userupdate',upload.single('photo'),function (req,res) {
   var update={
     name:req.body.uname,
     email:req.body.email,
-    password:req.body.pwd
+    password:req.body.password
   }
   if(req.file) update.imgUrl='/images/uploads/'+req.file.filename;
   User.findByIdAndUpdate(req.body.id,{$set : update},function (err,rtn) {
@@ -96,7 +96,7 @@ router.post('/duemail',function (req,res) {
 }
   })
 })
-router.post('/checkP',function (req,res) {
+router.post('/checkp',function (req,res) {
   var sta=schema.validate(req.body.password);
   res.json({status:sta})
 })

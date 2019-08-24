@@ -9,6 +9,9 @@ var session=require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
+var apiuser=require('./api/routes/users');
+var apipost=require('./api/routes/posts');
+var apiadmin=require('./api/routes/admin');
 var app = express();
 
 // view engine setup
@@ -37,6 +40,9 @@ app.use(function (req,res,next) {
 
 });
 
+app.use('/api/users',apiuser);
+app.use('/api/posts',apipost);
+app.use('/api',apiadmin);
 app.use('/', indexRouter);
 app.use(function (req,res,next) {
   if(req.session.user){
